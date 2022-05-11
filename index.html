@@ -20,11 +20,30 @@ The user should be able to see the list of tasks, add new ones, delete existing 
     Specify the title, the charset (UTF-8) and the viewport of the page.
     -->
     <style>
-      /* EXERCISE 2:  
-       Create a CSS class for the task list with a different background color
-       Create a CSS class for the task list item with a border, a bold text and a bigger font size
-       Style every button of the page to be bigger
-    */
+      /* EXERCISE 2:
+         Create a CSS class for the task list with a different background color
+         Create a CSS class for the task list item with a border, a bold text and a bigger font size
+         Style every button of the page to be bigger
+      */
+      #myTaskList {
+        background-color: rgb(217, 210, 145);
+      }
+
+      #myTaskList li {
+        font-weight: bold;
+        font-size: larger;
+        border: 1px solid coral;
+      }
+
+      button {
+        padding: 10px;
+        font-size: 30px;
+      }
+
+      input[type="button"] {
+        font-size: 30px;
+        padding: 10px;
+      }
     </style>
   </head>
   <body>
@@ -47,6 +66,7 @@ The user should be able to see the list of tasks, add new ones, delete existing 
         Create a button "Remove First Task" to trigger the method "removeFirst"
         -->
     <button onclick="removeFirst()">Remove First Task</button>
+
     <ul id="myTaskList"></ul>
 
     <hr />
@@ -70,41 +90,70 @@ The user should be able to see the list of tasks, add new ones, delete existing 
                 - Use the document.createElement to create the new List Item
                 - Append the LI child to the UL
             */
-      function addNewTask() {
+      /* function addNewTask() {
         let taskToAdd = document.getElementById("newTask").value;
 
         let newListItem = document.createElement("li");
         newListItem.innerText = taskToAdd;
         document.getElementById("myTaskList").appendChild(newListItem);
+      } */
+
+      function addNewTask() {
+        let addNewTask = document.getElementById("newTask").value;
+        let uoList = document.getElementById("myTaskList");
+        let newListItem = document.createElement("li");
+        newListItem.innerText = addNewTask;
+        uoList.appendChild(newListItem);
       }
 
       /* EXERCISE 6:
                 Create a method "removeLast" which removes the last item from the task list
             */
       function removeLast() {
-        let taskList = document.getElementById("myTaskList");
-        let listItems = document.getElementsByTagName("li");
-        let removeLast = listItems[listItems.length - 1];
-        taskList.removeChild(removeLast);
+        // let taskList = document.getElementById("myTaskList");
+        // let listItems = document.getElementsByTagName("li");
+        // let removeLast = listItems[listItems.length - 1];
+        // taskList.removeChild(removeLast);
+        let tasks = document.querySelectorAll("#myTaskList li");
+        tasks[tasks.length - 1].remove();
       }
       /* EXERCISE 7:
                 Create a method "removeFirst" which removes the first item from the task list
             */
       function removeFirst() {
-        let taskList = document.getElementById("myTaskList");
-        let listItems = document.querySelectorAll("li");
-        let removeFirst = document.querySelectorAll("li")[0];
-        taskList.removeChild(removeFirst);
+        //let taskList = document.getElementById("myTaskList");
+        //let listItems = document.querySelectorAll("li");
+        //let removeFirst = document.querySelectorAll("li")[0];
+        //taskList.removeChild(removeFirst);
+        let tasks = document.querySelectorAll("#myTaskList li");
+        tasks[0].remove();
       }
       /* EXERCISE 8:
                Create a method "getTasksAsArray" which returns, and prints to the console an array containing the tasks as strings
             */
-
+      function getTasksAsArray() {
+        let list = document.getElementById("myTaskList");
+        let listItems = document.getElementsByTagName("li");
+        let arrayOftasks = [];
+        for (let i = 0; i < listItems.length; i++) {
+          console.log(listItems[i].push.arrayOfTasks);
+        }
+      }
       /* EXERCISE 9:
                Create a method "changeTaskBackgroundColor" which takes the color from the color picker with an
                onchange event listener ad applies it as background to every list item
             */
-      function changeTaskBackgroundColor() {}
+
+      function changeTaskBackgroundColor() {
+        let bgColor = document.querySelector("#colorPicker").value;
+        let listItems = document.querySelectorAll("#myTaskList li");
+        for (let i = 0; i < listItems.length; i++) {
+          listItems[i].style.backgroundColor = bgColor;
+        }
+      }
+      let bgColorEvent = document
+        .querySelector("#colorPicker")
+        .bgColorEvent.addEventListener("change", changeTaskBackgroundColor);
       /* EXTRA */
 
       /* EXERCISE 10:
